@@ -10,7 +10,8 @@ namespace JosephusProblem
     {
         static void Main(string[] args)
         {
-
+            DoWork d = new DoWork();
+            d.Do();
         }
     }
 
@@ -18,13 +19,17 @@ namespace JosephusProblem
     {
         int input;
         int step;
+        private int k;
         List<int> spisok;
 
         public void Do()
         {
-            int.TryParse(Console.ReadLine().Split(' ')[0], out input);
-            int.TryParse(Console.ReadLine().Split(' ')[1], out step);
+            string[] temp = Console.ReadLine().Split(' ');
+            int.TryParse(temp[0], out input);
+            int.TryParse(temp[1], out step);
             spisok = new List<int>(input);
+            stepByStep();
+            Console.Write(spisok[0]);
         }
 
         void stepByStep()
@@ -34,7 +39,22 @@ namespace JosephusProblem
                 spisok.Add(i);
             }
 
-            
+            k = 1;
+
+            while (spisok.Count > 1)
+            {
+                for (int i = 0; i < spisok.Count; i++)
+                {
+                    if (k % step == 0)
+                    {
+                        spisok.Remove(spisok[i]);
+                        i--;
+                    }
+
+                    k++;
+                }
+            }
+
         }
     }
 }
